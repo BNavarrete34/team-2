@@ -1,0 +1,401 @@
+<!doctype html>
+  <html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Field Notes</title>
+  <style>
+    :root{
+      --paper:#f2f1ec;
+      --paper-raised:#fbfaf6;
+      --ink:#1e2a2f;
+    --ink-soft:#4a5a5f;
+    --line:#d8d5c9;
+          --accent:#c05a2c;
+          --accent-ink:#fff8f0;
+          --tag-bg:#e7e3d4;
+          --shadow: 0 1px 0 rgba(30,42,47,0.06);
+}
+  @media (prefers-color-scheme: dark){
+        :root:not([data-theme="light"]){
+      --paper:#191d1c;
+      --paper-raised:#222624;
+      --ink:#ece7dc;
+              --ink-soft:#a9b0ac;
+              --line:#343b38;
+      --accent:#e08350;
+              --accent-ink:#1b120a;
+      --tag-bg:#2b312e;
+      --shadow: 0 1px 0 rgba(0,0,0,0.4);
+        }
+          }
+  :root[data-theme="dark"]{
+    --paper:#191d1c;
+    --paper-raised:#222624;
+    --ink:#ece7dc;
+          --ink-soft:#a9b0ac;
+          --line:#343b38;
+    --accent:#e08350;
+          --accent-ink:#1b120a;
+    --tag-bg:#2b312e;
+    --shadow: 0 1px 0 rgba(0,0,0,0.4);
+}
+
+  *{box-sizing:border-box;}
+      body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+    padding-inline:20px;
+    padding-block:0;
+    line-height:1.5;
+    margin:0;
+}
+  h1,h2,h3{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:600;
+    text-wrap:balance;
+    margin:0;
+}
+  a{color:inherit;}
+      .wrap{max-width:880px;margin-inline:auto;}
+      .topbar{
+    position:sticky;
+        top:0;
+    z-index:10;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    padding-block:14px;
+    }
+  .topbar-inner{
+          max-width:880px;
+          margin-inline:auto;
+        display:flex;
+            align-items:baseline;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+    padding-inline:20px;
+}
+  .brand{
+    font-family:'Fraunces', Georgia, serif;
+    font-size:1.1rem;
+        font-weight:600;
+        }
+          .brand .dot{color:var(--accent);}
+  nav.tabs{
+    display:flex;
+          gap:4px;
+    background:var(--tag-bg);
+    padding:4px;
+    border-radius:8px;
+}
+  nav.tabs button{
+    font:inherit;
+    font-size:0.85rem;
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.02em;
+        border:none;
+            background:transparent;
+    color:var(--ink-soft);
+    padding:6px 12px;
+    border-radius:6px;
+    cursor:pointer;
+}
+        nav.tabs button[aria-selected="true"]{
+    background:var(--paper-raised);
+    color:var(--ink);
+    box-shadow:var(--shadow);
+}
+  nav.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+  section{padding-block:48px;}
+  section[hidden]{display:none!important;}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:10px;
+}
+  .hero h1{font-size:clamp(2rem,5vw,3.1rem);}
+  .hero p.lede{
+    max-width:60ch;
+        font-size:1.05rem;
+    color:var(--ink-soft);
+    margin-top:16px;
+    }
+  .meta-row{
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+        margin-top:32px;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+}
+  .meta-item .label{
+          font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--ink-soft);
+    margin-bottom:4px;
+}
+  .meta-item .value{font-size:0.95rem;}
+        .home-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+          background:var(--line);
+    border:1px solid var(--line);
+    margin-top:40px;
+        border-radius:10px;
+        overflow:hidden;
+}
+  .home-grid > div{
+    background:var(--paper-raised);
+          padding:20px;
+}
+  .home-grid h3{font-size:1rem;margin-bottom:6px;}
+  .home-grid p{font-size:0.88rem;color:var(--ink-soft);margin:0;}
+
+  .section-head{margin-bottom:32px;}
+        .section-head .eyebrow{margin-bottom:8px;}
+  .section-head h2{font-size:1.9rem;}
+        .section-head p{color:var(--ink-soft);margin-top:8px;max-width:56ch;}
+  .team-grid{
+    display:grid;
+        grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:16px;
+        }
+  .member{
+        background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px;
+    box-shadow:var(--shadow);
+  }
+  .avatar{
+        width:44px;height:44px;
+    border-radius:50%;
+    background:var(--accent);
+    color:var(--accent-ink);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    margin-bottom:14px;
+  }
+  .member h3{font-size:1.05rem;}
+  .member .role{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    color:var(--accent);
+    margin-top:4px;
+    margin-bottom:10px;
+  }
+  .member p.bio{font-size:0.88rem;color:var(--ink-soft);margin:0;}
+  .project-list{display:flex;flex-direction:column;gap:16px;}
+  .project{
+        background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:24px;
+    box-shadow:var(--shadow);
+}
+  .project-top{
+        display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:16px;
+    flex-wrap:wrap;
+}
+  .project h3{font-size:1.2rem;}
+  .status{
+        font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    padding:4px 9px;
+    border-radius:99px;
+    background:var(--tag-bg);
+    color:var(--ink-soft);
+        white-space:nowrap;
+}
+  .project p.desc{color:var(--ink-soft);font-size:0.92rem;margin:12px 0 14px;max-width:64ch;}
+  .tags{display:flex;gap:8px;flex-wrap:wrap;}
+  .tag{
+        font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    background:var(--tag-bg);
+    color:var(--ink-soft);
+    padding:3px 9px;
+    border-radius:99px;
+}
+  .placeholder-flag{
+        margin-top:40px;
+    padding:14px 16px;
+    border:1px dashed var(--line);
+    border-radius:8px;
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+}
+
+  footer{
+        border-top:1px solid var(--line);
+    padding-block:28px;
+    font-size:0.8rem;
+    color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+}
+
+  @media (max-width:640px){
+    .home-grid{grid-template-columns:1fr;}
+    .topbar-inner{flex-direction:column;align-items:flex-start;}
+}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-inner">
+        <div class="brand">Course Name <span class="dot">·</span> Team Project</div>
+      <nav class="tabs" role="tablist" aria-label="Site sections">
+      <button role="tab" aria-selected="true" data-tab="home">Home</button>
+        <button role="tab" aria-selected="false" data-tab="team">Team</button>
+        <button role="tab" aria-selected="false" data-tab="projects">Projects</button>
+      </nav>
+    </div>
+</div>
+
+  <div class="wrap">
+
+    <section id="home">
+      <div class="hero">
+        <div class="eyebrow">Team project · Fall 2026</div>
+        <h1>Project Title Goes Here</h1>
+        <p class="lede">One or two sentences on what this project sets out to do and why it matters.</p>
+        <div class="meta-row">
+          <div class="meta-item">
+            <div class="label">Course</div>
+            <div class="value">Course code & name</div>
+          </div>
+          <div class="meta-item">
+            <div class="label">Team size</div>
+            <div class="value">4 members</div>
+          </div>
+          <div class="meta-item">
+            <div class="label">Due</div>
+            <div class="value">Month DD, 2026</div>
+          </div>
+        </div>
+      </div>
+      <div class="home-grid">
+        <div>
+          <h3>Who we are</h3>
+          <p>A quick line about the team's angle or focus.</p>
+        </div>
+        <div>
+          <h3>What we built</h3>
+          <p>A quick line about the project's core deliverable.</p>
+        </div>
+        <div>
+          <h3>Where to look</h3>
+          <p>Links to the repo, slides, or write-up.</p>
+        </div>
+      </div>
+
+      <p class="placeholder-flag">This is example content. Ask Claude to update it with your team's real details.</p>
+    </section>
+
+    <section id="team" hidden>
+      <div class="section-head">
+        <div class="eyebrow">Who's on this</div>
+        <h2>The team</h2>
+        <p>Four placeholder profiles below.</p>
+      </div>
+      <div class="team-grid">
+        <div class="member">
+          <div class="avatar">A</div>
+          <h3>Member One</h3>
+          <div class="role">Role / focus area</div>
+          <p class="bio">One sentence on what they worked on.</p>
+        </div>
+        <div class="member">
+          <div class="avatar">B</div>
+          <h3>Member Two</h3>
+          <div class="role">Role / focus area</div>
+          <p class="bio">One sentence on what they worked on.</p>
+        </div>
+        <div class="member">
+          <div class="avatar">C</div>
+          <h3>Member Three</h3>
+          <div class="role">Role / focus area</div>
+          <p class="bio">One sentence on what they worked on.</p>
+        </div>
+        <div class="member">
+          <div class="avatar">D</div>
+          <h3>Member Four</h3>
+        <div class="role">Role / focus area</div>
+          <p class="bio">One sentence on what they worked on.</p>
+      </div>
+      </div>
+    </section>
+    <section id="projects" hidden>
+      <div class="section-head">
+      <div class="eyebrow">What we made</div>
+        <h2>Projects</h2>
+        <p>One card per project or milestone.</p>
+      </div>
+      <div class="project-list">
+      <div class="project">
+          <div class="project-top">
+            <h3>Project One: Working Title</h3>
+            <span class="status">In progress</span>
+        </div>
+          <p class="desc">A short paragraph on what this project is.</p>
+        <div class="tags">
+          <span class="tag">Tool / language</span>
+            <span class="tag">Tool / language</span>
+          <span class="tag">Method</span>
+          </div>
+        </div>
+        <div class="project">
+        <div class="project-top">
+            <h3>Project Two: Working Title</h3>
+            <span class="status">Planned</span>
+          </div>
+          <p class="desc">A short paragraph on what this project is.</p>
+          <div class="tags">
+          <span class="tag">Tool / language</span>
+            <span class="tag">Method</span>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <footer>Built with Claude · replace this line with your team's credit or contact info</footer>
+  </div>
+  <script>
+    (function(){
+    var buttons = document.querySelectorAll('nav.tabs button');
+      var sections = {
+        home: document.getElementById('home'),
+        team: document.getElementById('team'),
+      projects: document.getElementById('projects')
+  };
+    buttons.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var target = btn.getAttribute('data-tab');
+          buttons.forEach(function(b){ b.setAttribute('aria-selected', b === btn ? 'true' : 'false'); });
+          Object.keys(sections).forEach(function(key){
+          sections[key].hidden = key !== target;
+  });
+  });
+  });
+  })();
+</script>
+  </body>
+</html>
