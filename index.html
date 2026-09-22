@@ -1,0 +1,481 @@
+<!doctype html>
+  <html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team 2 Journeys</title>
+  <style>
+    :root{
+      --sand:#fbf1e1;
+      --sand-raised:#fffbf3;
+      --ink:#123a3e;
+    --ink-soft:#537779;
+    --line:#e7d7b6;
+          --teal:#0e9aa0;
+    --teal-ink:#ffffff;
+          --coral:#ff6f81;
+          --butter:#ffc857;
+          --speck-teal: rgba(14,154,160,0.16);
+    --speck-coral: rgba(255,111,129,0.14);
+    --speck-butter: rgba(255,200,87,0.18);
+    --shadow: 0 1px 0 rgba(18,58,62,0.06);
+}
+  @media (prefers-color-scheme: dark){
+        :root:not([data-theme="light"]){
+      --sand:#122428;
+      --sand-raised:#1a3236;
+      --ink:#f3e9d3;
+              --ink-soft:#a9c4c6;
+              --line:#2c494d;
+      --teal:#2bc4c9;
+      --teal-ink:#0d2023;
+      --coral:#ff8fa3;
+      --butter:#ffd873;
+              --speck-teal: rgba(43,196,201,0.14);
+      --speck-coral: rgba(255,143,163,0.12);
+      --speck-butter: rgba(255,216,115,0.14);
+      --shadow: 0 1px 0 rgba(0,0,0,0.4);
+        }
+          }
+  :root[data-theme="dark"]{
+    --sand:#122428;
+    --sand-raised:#1a3236;
+    --ink:#f3e9d3;
+    --ink-soft:#a9c4c6;
+          --line:#2c494d;
+    --teal:#2bc4c9;
+    --teal-ink:#0d2023;
+    --coral:#ff8fa3;
+    --butter:#ffd873;
+          --speck-teal: rgba(43,196,201,0.14);
+    --speck-coral: rgba(255,143,163,0.12);
+    --speck-butter: rgba(255,216,115,0.14);
+    --shadow: 0 1px 0 rgba(0,0,0,0.4);
+}
+
+  *{box-sizing:border-box;}
+  body{
+    background-color:var(--sand);
+    background-image:
+      radial-gradient(circle, var(--speck-teal) 1.6px, transparent 1.6px),
+            radial-gradient(circle, var(--speck-coral) 1.3px, transparent 1.3px),
+      radial-gradient(circle, var(--speck-butter) 1.8px, transparent 1.8px);
+    background-size: 130px 130px, 90px 90px, 160px 160px;
+          background-position: 0 0, 45px 60px, 100px 20px;
+    background-attachment: fixed;
+    color:var(--ink);
+    font-family:'Poppins', ui-sans-serif, system-ui, sans-serif;
+    padding-inline:20px;
+    padding-block:0;
+    line-height:1.55;
+          margin:0;
+}
+  h1,h2,h3{
+    font-family:'Bebas Neue', 'Poppins', sans-serif;
+    font-weight:400;
+                letter-spacing:0.02em;
+    text-wrap:balance;
+    margin:0;
+}
+  .mono{
+    font-family:'IBM Plex Mono', ui-monospace, monospace;
+          letter-spacing:0.02em;
+}
+        a{color:inherit;}
+
+  .wrap{max-width:880px;margin-inline:auto;}
+  .topbar{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:var(--sand);
+    padding-block:14px 10px;
+    border-bottom:3px double var(--teal);
+}
+  .topbar-inner{
+    max-width:880px;
+    margin-inline:auto;
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+    padding-inline:20px;
+}
+  .brand{
+    font-family:'Bebas Neue', sans-serif;
+        font-size:1.5rem;
+    letter-spacing:0.03em;
+      }
+        .brand .dot{color:var(--coral);}
+  nav.tabs{
+    display:flex;
+    gap:4px;
+    background:var(--sand-raised);
+    border:1px solid var(--line);
+    padding:4px;
+    border-radius:99px;
+}
+  nav.tabs button{
+          font:inherit;
+    font-size:0.82rem;
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.02em;
+    border:none;
+    background:transparent;
+    color:var(--ink-soft);
+    padding:7px 16px;
+        border-radius:99px;
+    cursor:pointer;
+    }
+  nav.tabs button[aria-selected="true"]{
+    background:var(--teal);
+    color:var(--teal-ink);
+}
+  nav.tabs button:focus-visible{outline:2px solid var(--coral);outline-offset:2px;}
+
+  section{padding-block:48px;}
+  section[hidden]{display:none!important;}
+
+  .sunburst{
+    width:52px;
+    height:28px;
+    margin-bottom:14px;
+}
+
+        .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--coral);
+    margin-bottom:10px;
+}
+  .hero{position:relative;}
+  .flamingo{
+    position:absolute;
+    top:-18px;
+    right:0;
+        width:120px;
+    height:auto;
+          color:var(--coral);
+    opacity:0.24;
+    pointer-events:none;
+  }
+  @media (max-width:640px){
+    .flamingo{width:80px;top:-8px;}
+  }
+  .hero h1{font-size:clamp(2.4rem,6vw,3.6rem);}
+  .hero p.lede{
+    max-width:60ch;
+    font-size:1.05rem;
+    color:var(--ink-soft);
+    margin-top:16px;
+  }
+  .meta-row{
+        display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+    margin-top:32px;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+}
+  .meta-item .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--ink-soft);
+    margin-bottom:4px;
+  }
+  .meta-item .value{font-size:0.95rem;font-weight:600;}
+
+  .home-grid{
+        display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin-top:40px;
+}
+  .home-grid > div{
+        background:var(--sand-raised);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:20px;
+    border-radius:12px;
+}
+  .home-grid > div:nth-child(2){border-top-color:var(--coral);}
+  .home-grid > div:nth-child(3){border-top-color:var(--butter);}
+  .home-grid h3{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;font-weight:400;margin-bottom:6px;letter-spacing:0.02em;}
+  .home-grid p{font-size:0.88rem;color:var(--ink-soft);margin:0;}
+  .section-head{margin-bottom:32px;}
+      .section-head h2{font-size:2.2rem;}
+      .section-head p{color:var(--ink-soft);margin-top:8px;max-width:56ch;}
+
+  .team-grid{
+        display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:16px;
+    }
+  .member{
+        background:var(--sand-raised);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:20px;
+    box-shadow:var(--shadow);
+  }
+  .avatar{
+        width:44px;height:44px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Bebas Neue',sans-serif;
+    font-size:1.2rem;
+    margin-bottom:14px;
+  }
+  .avatar.c1{background:var(--teal);color:var(--teal-ink);}
+  .avatar.c2{background:var(--coral);color:#3a0f16;}
+  .avatar.c3{background:var(--butter);color:#3a2a06;}
+  .member h3{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;font-weight:400;letter-spacing:0.02em;}
+  .member .role{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    color:var(--coral);
+    margin-top:4px;
+    margin-bottom:10px;
+  }
+  .member p.bio{font-size:0.88rem;color:var(--ink-soft);margin:0;}
+  .project-list{display:flex;flex-direction:column;gap:16px;}
+  .project{
+        background:var(--sand-raised);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:24px;
+    box-shadow:var(--shadow);
+}
+  .project-top{
+        display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:16px;
+    flex-wrap:wrap;
+}
+  .project h3{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;font-weight:400;letter-spacing:0.02em;}
+  .status{
+        font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    padding:4px 11px;
+    border-radius:99px;
+    white-space:nowrap;
+}
+  .status.progress{background:var(--teal);color:var(--teal-ink);}
+  .status.planned{background:var(--butter);color:#3a2a06;}
+  .project p.desc{color:var(--ink-soft);font-size:0.92rem;margin:12px 0 14px;max-width:64ch;}
+  .tags{display:flex;gap:8px;flex-wrap:wrap;}
+  .tag{
+        font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--ink-soft);
+    padding:3px 10px;
+    border-radius:99px;
+}
+  footer{
+        border-top:3px double var(--teal);
+    padding-block:28px;
+    font-size:0.8rem;
+    color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+}
+
+  @media (max-width:640px){
+    .home-grid{grid-template-columns:1fr;}
+    .topbar-inner{flex-direction:column;align-items:flex-start;}
+}
+</style>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  </head>
+  <body>
+  <div class="topbar">
+    <div class="topbar-inner">
+    <div class="brand">Team 2 <span class="dot">&middot;</span> UPV MUGEPS</div>
+    <nav class="tabs" role="tablist" aria-label="Site sections">
+        <button role="tab" aria-selected="true" data-tab="home">Home</button>
+      <button role="tab" aria-selected="false" data-tab="team">Team</button>
+          <button role="tab" aria-selected="false" data-tab="projects">Projects</button>
+      </nav>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <section id="home">
+      <div class="hero">
+        <svg class="flamingo" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g fill="currentColor">
+            <ellipse cx="55" cy="95" rx="22" ry="16" transform="rotate(-10 55 95)"/>
+            <path d="M40 85 C 30 70, 28 45, 42 28 C 48 20, 58 16, 64 18 C 60 20, 54 24, 50 30 C 40 44, 40 62, 48 80 Z"/>
+            <circle cx="63" cy="19" r="6"/>
+            <path d="M69 17 L82 12 L70 22 Z"/>
+            <path d="M50 108 L46 137 L51 137 L54 112 Z"/>
+            <path d="M39 135 L54 135 L54 139 L37 139 Z"/>
+          </g>
+        </svg>
+        <svg class="sunburst" viewBox="0 0 52 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M26 28C26 13 16 3 2 1" stroke="var(--teal)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M26 28C26 11 18 2 9 0.5" stroke="var(--coral)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M26 28C26 10 26 1 26 0" stroke="var(--butter)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M26 28C26 11 34 2 43 0.5" stroke="var(--coral)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M26 28C26 13 36 3 50 1" stroke="var(--teal)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <div class="eyebrow">Team 2 &middot; UPV MUGEPS</div>
+        <h1>Our Journeys</h1>
+        <p class="lede">Six routes into the same Valencia classroom &mdash; mapped out journey by journey, from where we started to why we're here.</p>
+        <div class="meta-row">
+          <div class="meta-item">
+            <div class="label">Programme</div>
+            <div class="value">UPV MUGEPS</div>
+          </div>
+          <div class="meta-item">
+            <div class="label">Team size</div>
+            <div class="value">6 members</div>
+          </div>
+          <div class="meta-item">
+          <div class="label">Due</div>
+            <div class="value">TBD</div>
+          </div>
+        </div>
+    </div>
+
+      <div class="home-grid">
+        <div>
+          <h3>Who we are</h3>
+          <p>Six classmates from the US, Lebanon, Italy, and China, now studying together in Valencia.</p>
+        </div>
+        <div>
+          <h3>What we built</h3>
+          <p>A set of personal journey maps tracing each person's path here &mdash; and what they're into outside class.</p>
+        </div>
+        <div>
+        <h3>Where to look</h3>
+          <p>The Team tab has everyone's story; Projects has the full journey-mapping exercise.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="team" hidden>
+    <div class="section-head">
+        <svg class="sunburst" viewBox="0 0 52 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M26 28C26 13 16 3 2 1" stroke="var(--teal)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M26 28C26 11 18 2 9 0.5" stroke="var(--coral)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M26 28C26 10 26 1 26 0" stroke="var(--butter)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M26 28C26 11 34 2 43 0.5" stroke="var(--coral)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M26 28C26 13 36 3 50 1" stroke="var(--teal)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <h2>The team</h2>
+        <p>Six backgrounds, one cohort &mdash; everyone's path here, plus what they're into outside class.</p>
+      </div>
+      <div class="team-grid">
+        <div class="member">
+          <div class="avatar c1">FS</div>
+          <h3>Frank Santana</h3>
+          <div class="role">Humanities &amp; Humanitarian Focus</div>
+        <p class="bio">A wide-ranging mind map of interests &mdash; chemistry, arts, social studies &mdash; converging on humanitarian work. Big believer that music brings people together.</p>
+        </div>
+        <div class="member">
+          <div class="avatar c2">BN</div>
+          <h3>Brandon Navarrete</h3>
+          <div class="role">Criminology &rarr; Hospitality</div>
+          <p class="bio">USA to Spain: studied Criminology, taught English in Salamanca, now in Valencia for UPV MUGEPS. Into photography, travel, food, and music.</p>
+        </div>
+        <div class="member">
+          <div class="avatar c3">MH</div>
+          <h3>Mohamad Hawila</h3>
+          <div class="role">Hospitality Manager</div>
+          <p class="bio">Life Sciences in Lebanon, then Poland, now Hospitality Management and Business Studies in Spain. Pianist, chef, boxer, and football player.</p>
+      </div>
+      <div class="member">
+        <div class="avatar c1">MZ</div>
+        <h3>Matteo Zito</h3>
+          <div class="role">Tour Guide &rarr; Innovation</div>
+          <p class="bio">From Brescia, Italy &mdash; work experience as a tour guide alongside a path through innovation and university studies. Sports, music, nature, food.</p>
+        </div>
+        <div class="member">
+          <div class="avatar c2">XH</div>
+          <h3>Xiaojuan Huang</h3>
+          <div class="role">Cross-Cultural Business</div>
+          <p class="bio">China to the US (Denver, UNC) to Germany to Spain &mdash; a double-degree path built on cross-cultural and international experience. Pilates, travel, beach volleyball, cognitive psychology.</p>
+        </div>
+        <div class="member">
+          <div class="avatar c3">XY</div>
+          <h3>Xinyu Ye</h3>
+          <div class="role">International Experience</div>
+          <p class="bio">From China to Valencia for UPV MUGEPS, building on prior international and customer-experience work. Traveling, extreme sports, reading, recording.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" hidden>
+      <div class="section-head">
+        <svg class="sunburst" viewBox="0 0 52 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M26 28C26 13 16 3 2 1" stroke="var(--teal)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M26 28C26 11 18 2 9 0.5" stroke="var(--coral)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M26 28C26 10 26 1 26 0" stroke="var(--butter)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M26 28C26 11 34 2 43 0.5" stroke="var(--coral)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M26 28C26 13 36 3 50 1" stroke="var(--teal)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <h2>Projects</h2>
+        <p>The journey-mapping exercise, and whatever Team 2 builds on it next.</p>
+      </div>
+      <div class="project-list">
+        <div class="project">
+          <div class="project-top">
+            <h3>Journey Maps</h3>
+            <span class="status progress">Complete</span>
+          </div>
+          <p class="desc">Each teammate sketched out the path that brought them to UPV MUGEPS in Valencia &mdash; schools, cities, career turns &mdash; alongside a set of personal interests. Six very different routes to the same classroom.</p>
+          <div class="tags">
+            <span class="tag">Whiteboard</span>
+            <span class="tag">Icebreaker</span>
+            <span class="tag">Team Building</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-top">
+            <h3>Next Up</h3>
+          <span class="status planned">Planned</span>
+          </div>
+          <p class="desc">Placeholder for the team's next deliverable &mdash; swap this out once it's decided.</p>
+          <div class="tags">
+            <span class="tag">TBD</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>Team 2 &middot; UPV MUGEPS &middot; Valencia</footer>
+  </div>
+
+  <script>
+    (function(){
+      var buttons = document.querySelectorAll('nav.tabs button');
+    var sections = {
+      home: document.getElementById('home'),
+      team: document.getElementById('team'),
+      projects: document.getElementById('projects')
+};
+    buttons.forEach(function(btn){
+            btn.addEventListener('click', function(){
+                      var target = btn.getAttribute('data-tab');
+        buttons.forEach(function(b){ b.setAttribute('aria-selected', b === btn ? 'true' : 'false'); });
+        Object.keys(sections).forEach(function(key){
+                    sections[key].hidden = key !== target;
+        });
+            });
+    });
+})();
+</script>
+  </body>
+  </html>
+  
